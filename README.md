@@ -1,7 +1,16 @@
 # php-logic-simplifier
+
 php-logic-simplifier 逻辑表达式
 
-source [kjarosz256/python-logic-simplifier](https://github.com/kjarosz256/python-logic-simplifier)
+From [kjarosz256/python-logic-simplifier](https://github.com/kjarosz256/python-logic-simplifier)
+
+
+#### install:
+
+`composer require poem/php-logic-simplifier`
+
+
+#### example:
 
 ```
 <?php
