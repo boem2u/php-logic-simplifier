@@ -2,9 +2,12 @@
 
 namespace Logic\Simplifier;
 
-class ParseException extends \Exception
-{}
-
+use Logic\Simplifier\Exception\ParseException;
+use Logic\Simplifier\Expression\Negation;
+use Logic\Simplifier\Expression\Operator;
+use Logic\Simplifier\Expression\FalseVal;
+use Logic\Simplifier\Expression\TrueVal;
+use Logic\Simplifier\Expression\Variable;
 
 class Parser
 {
@@ -131,7 +134,44 @@ class Parser
     }
 }
 
-function parse($data)
+
+
+function parse_test()
 {
-    return (new Parser($data))->parse();
+    $_test_parse = function($expr)
+    {
+        try {
+            echo sprintf('%s -> %s', str_pad($expr, 16), parse($expr)).PHP_EOL;
+        } catch (\Exception $e) {
+            echo sprintf('%s -> %s', str_pad($expr, 16), 'Invalid syntax').PHP_EOL;
+        }
+    };
+
+    // $_test_parse('a&b');
+    // $_test_parse('a|~b');
+    // $_test_parse('(~a & b) |c');
+    // $_test_parse('(a & (b) |c)');
+    // $_test_parse('a & (b |c)');
+    // $_test_parse('a & (~b |c');
+    // $_test_parse('a) & (b |c');
+    // $_test_parse('(a > b) |c');
+    // $_test_parse('a > (b |~c)');
+    // $_test_parse('abc & def');
+    // $_test_parse('abc & def *');
+
+    echo "\n";
+
+    $expr = parse('a & (b) & 1');
+    print($expr).PHP_EOL;
+
+    $str = [];
+    foreach ($expr->extract_vars() as $value) {
+        $str[] = "'{$value}'";
+    }
+    $str = "{".implode(',', $str)."}";
+    print($str).PHP_EOL;
+    var_dump($expr->eval([
+        'a' =>  true,
+        'b' =>  false
+    ]));
 }

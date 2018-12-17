@@ -2,6 +2,17 @@
 
 namespace Logic\Simplifier;
 
+use Logic\Simplifier\Expression\Operator;
+
+function array_value_union(... $arr_list)
+{
+    foreach ($arr_list as &$arr) {
+        $arr = array_values($arr);
+    }
+    $data = array_unique(array_merge(... $arr_list));
+    return $data;
+}
+
 class SimplificationTable
 {
     function __construct($grouped)
@@ -193,36 +204,57 @@ class SimplificationTable
         }
         return new SimplificationTable($ret);
     }
-}
 
-function simplify_expr($expr)
-{
-    $tbl = SimplificationTable::for_expr($expr);
-    $tbl->fill_stages();
-    $minimal_results = $tbl->minimal_results();
+    public static function simplify_expr($expr)
+    {
+        $tbl = SimplificationTable::for_expr($expr);
+        $tbl->fill_stages();
+        $minimal_results = $tbl->minimal_results();
 
-    $simplified = null;
-    foreach ($minimal_results as $reduced) {
-        $expr = $reduced->get_reduced()->to_expr();
-        if ($simplified == null) {
-            $simplified = $expr;
-        } else {
-            $simplified = new Operator($simplified, '|', $expr);
+        $simplified = null;
+        foreach ($minimal_results as $reduced) {
+            $expr = $reduced->get_reduced()->to_expr();
+            if ($simplified == null) {
+                $simplified = $expr;
+            } else {
+                $simplified = new Operator($simplified, '|', $expr);
+            }
         }
+
+        return ($simplified != null) ? $simplified : new FalseVal();
     }
 
-    return ($simplified != null) ? $simplified : new FalseVal();
+    public static function simplify($s)
+    {
+        $str = '';
+        $len = mb_strlen($s);
+        for ($i=0; $i < $len; $i++) { 
+            $ch = mb_substr($s, $i, 1);
+            if (ord($ch) != 32) {
+                $str .= $ch;
+            }
+        }
+        $data = (new Parser($str))->parse();
+        return strval(static::simplify_expr($data));
+    }
 }
 
-function simplify($s)
+
+
+
+function SimplificationTable_test()
 {
-    $str = '';
-    $len = mb_strlen($s);
-    for ($i=0; $i < $len; $i++) { 
-        $ch = mb_substr($s, $i, 1);
-        if (ord($ch) != 32) {
-            $str .= $ch;
-        }
-    }
-    return strval(simplify_expr(parse($str)));
+    // echo(simplify('~a&b&~c&~d | a&~b&~c&~d | a&~b&~c&d | a&~b&c&~d | ' . 
+                   // 'a&~b&c&d | a&b&~c&~d | a&b&c&~d | a&b&c&d')).PHP_EOL;
+    // print(simplify('~a&~b&~c | ~a&~b&c | ~a&b&~c | ~a&~b&c | a&b&~c | a&b&c')).PHP_EOL;
+    // print(simplify('a | ~a')).PHP_EOL;
+    // print(simplify('a & ~a')).PHP_EOL;
+    // print(simplify('~a&b&~c&~d | a&~b&~c&d | a&~b&~c&~d')).PHP_EOL;
+    // print(simplify('valid')).PHP_EOL;
+
+    $str = SimplificationTable::simplify('~(中国|~美国|~日本|~韩国) & (手机|电脑)');
+    print($str).PHP_EOL;
+    // print(simplify('(a|~b|~c|~d) & (e|f)')).PHP_EOL;
+
+    // print(simplify('invalid?')).PHP_EOL;
 }

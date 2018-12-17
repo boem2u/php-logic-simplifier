@@ -2,6 +2,12 @@
     "name": "poem/php-logic-simplifier",
     "description": "php login expression simplifier,Quine–McCluskey algorithm",
     "type": "library",
+    "require": {
+        "php": ">=7"
+    },
+    "require-dev": {
+        "php": ">=7"
+    },
     "license": "MIT",
     "authors": [
         {
@@ -9,8 +15,7 @@
             "email": "nice2m@qq.com"
         }
     ],
-    "minimum-stability": "beta",
-    "require": {},
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {"Logic\\Simplifier\\": "src/LogicSimplifier"}
 	}
