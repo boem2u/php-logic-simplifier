@@ -203,27 +203,3 @@ class ReducedPermutation
         return new ReducedPermutation([$prem], $prem);
     }
 }
-
-
-function perm_test()
-{
-    $list = Permutation::generate_values(['a', 'b', 'c', 'd']);
-    foreach ($list as $val) {
-        print($val);
-        echo "\n";
-    }
-    
-    # reducing
-    $a = ReducedPermutation::from_permutation(new Permutation([ 'a' => true, 'b' => false ]));
-    $b = ReducedPermutation::from_permutation(new Permutation([ 'a' => false, 'b' => false ]));
-    echo($a->reduce($b)).PHP_EOL;
-    $a = ReducedPermutation::from_permutation(new Permutation([ 'a' => true, 'b' => false ]));
-    $b = ReducedPermutation::from_permutation(new Permutation([ 'a' => false, 'b' => true ]));
-    echo($a->reduce($b)).PHP_EOL;
-    $a = ReducedPermutation::from_permutation(new Permutation([ 'a' => true, 'b' => null ]));
-    $b = ReducedPermutation::from_permutation(new Permutation([ 'a' => false, 'b' => null ]));
-    echo($a->reduce($b)).PHP_EOL;
-    $a = ReducedPermutation::from_permutation(new Permutation([ 'a' => true, 'b' => false ]));
-    $b = ReducedPermutation::from_permutation(new Permutation([ 'a' => true, 'b' => null ]));
-    echo($a->reduce($b)).PHP_EOL;
-}
