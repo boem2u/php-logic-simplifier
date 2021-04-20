@@ -15,7 +15,7 @@ class Variable extends Expression
         if (array_key_exists($this->name, $varmap)) {
             return $varmap[$this->name];
         }
-        throw new VariableNotFoundException("变量未找到", 2);
+        throw new VariableNotFoundException('VariableNotFound', 2);
     }
 
     public function extract_vars()

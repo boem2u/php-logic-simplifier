@@ -14,7 +14,7 @@ class ReducedPermutation
         $this->_reduced = $reduced;
 
         if (!($reduced instanceof Permutation)) {
-            throw new ValueError("错误的处理请求!", 1);
+            throw new ValueError("error permutation!", 1);
         }
     }
 

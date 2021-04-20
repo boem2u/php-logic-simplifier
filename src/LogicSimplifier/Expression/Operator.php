@@ -41,7 +41,7 @@ class Operator extends Expression
         } elseif ($this->op == '=') {
             return ($p() == $q());
         } else {
-            throw new VariableNotFoundException("无效操作符", 2);
+            throw new InvalidOperatorException('InvalidOperator', 2);
         }
     }
 

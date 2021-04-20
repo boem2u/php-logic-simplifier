@@ -30,7 +30,7 @@ class Parser
         $parsed = $this->_parseexpr();
 
         if ($this->_pos != mb_strlen($this->_data)) {
-            throw new ParseException("解析错误:".mb_substr($this->_data, $this->_pos, 1), 1);
+            throw new ParseException("Parse error:".mb_substr($this->_data, $this->_pos, 1), 1);
         }
 
         return $parsed;
@@ -79,7 +79,7 @@ class Parser
             $expr = $this->_parseexpr();
 
             if ($this->_next() != ')') {
-                throw new ParseException("期望以 ) 结束", 1);
+                throw new ParseException("end with )", 1);
             }
 
             return $expr;
@@ -109,7 +109,7 @@ class Parser
 
 
             if (mb_strlen($var) == 0) {
-                throw new ParseException("预期参数名称", 1);
+                throw new ParseException('Parse error', 1);
             }
 
             return new Variable($var);

@@ -238,23 +238,3 @@ class SimplificationTable
         return strval(static::simplify_expr($data));
     }
 }
-
-
-
-
-function SimplificationTable_test()
-{
-    // echo(simplify('~a&b&~c&~d | a&~b&~c&~d | a&~b&~c&d | a&~b&c&~d | ' . 
-                   // 'a&~b&c&d | a&b&~c&~d | a&b&c&~d | a&b&c&d')).PHP_EOL;
-    // print(simplify('~a&~b&~c | ~a&~b&c | ~a&b&~c | ~a&~b&c | a&b&~c | a&b&c')).PHP_EOL;
-    // print(simplify('a | ~a')).PHP_EOL;
-    // print(simplify('a & ~a')).PHP_EOL;
-    // print(simplify('~a&b&~c&~d | a&~b&~c&d | a&~b&~c&~d')).PHP_EOL;
-    // print(simplify('valid')).PHP_EOL;
-
-    $str = SimplificationTable::simplify('~(中国|~美国|~日本|~韩国) & (手机|电脑)');
-    print($str).PHP_EOL;
-    // print(simplify('(a|~b|~c|~d) & (e|f)')).PHP_EOL;
-
-    // print(simplify('invalid?')).PHP_EOL;
-}

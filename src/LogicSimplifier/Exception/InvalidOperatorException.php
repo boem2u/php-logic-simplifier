@@ -1,6 +1,6 @@
 <?php
 
-namespace Logic\Simplifier;
+namespace Logic\Simplifier\Exception;
 
 class InvalidOperatorException extends \Exception
 {}

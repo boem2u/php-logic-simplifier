@@ -8,7 +8,7 @@ class Expression
 {
     public function eval($varmap)
     {
-        throw new \Exception("必须实现该方法", 3);
+        throw new \Exception('must implement this method', 3);
     }
 
     public function extract_vars()
