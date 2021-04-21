@@ -2,5 +2,9 @@
 
 require_once '../vendor/autoload.php';
 
-$str = Logic\Simplifier\SimplificationTable::simplify('~(中国|~美国|~日本|~韩国) & (手机|电脑)');
+$str = Logic\Simplifier\SimplificationTable::simplify('~(a|~b|~c|~d) & (x|y)');
+print($str).PHP_EOL;
+
+
+$str = Logic\Simplifier\SimplificationTable::simplify('a|(a&b)|c');
 print($str).PHP_EOL;

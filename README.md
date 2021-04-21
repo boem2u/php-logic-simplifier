@@ -17,12 +17,12 @@ From [kjarosz256/python-logic-simplifier](https://github.com/kjarosz256/python-l
 
 require_once './vendor/autoload.php';
 
-$str = Logic\Simplifier\SimplificationTable::simplify('~(中国|~美国|~日本|~韩国) & (手机|电脑)');
+$str = Logic\Simplifier\SimplificationTable::simplify('~(a|~b|~c|~d) & (x|y)');
 print($str).PHP_EOL;
 
 ```
 
 output:
 ```
-~中国 & 手机 & 日本 & 美国 & 韩国 | ~中国 & 日本 & 电脑 & 美国 & 韩国
+~a & b & c & d & x | ~a & b & c & d & y
 ```
