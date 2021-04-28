@@ -7,7 +7,7 @@ From [kjarosz256/python-logic-simplifier](https://github.com/kjarosz256/python-l
 
 #### install:
 
-`composer require dddxxx/php-logic-simplifier`
+`composer require dddxiu/php-logic-simplifier`
 
 
 #### example:
