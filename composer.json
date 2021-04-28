@@ -1,5 +1,5 @@
 {
-    "name": "poem/php-logic-simplifier",
+    "name": "dddxxx/php-logic-simplifier",
     "description": "php login expression simplifier,Quine–McCluskey algorithm",
     "type": "library",
     "require": {
@@ -11,7 +11,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "poem",
+            "name": "dddxxx",
             "email": "nice2m@qq.com"
         }
     ],
